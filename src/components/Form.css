@@ -1,0 +1,27 @@
+#search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form-label {
+  padding: 1rem;
+}
+
+#submit-button {
+  margin: 1rem;
+}
+
+#warning-msg {
+  color: red;
+}
+
+.red {
+  border: 2px solid red;
+  color: red;
+}
+
+.green {
+  border: 2px solid green;
+  color: green;
+}
