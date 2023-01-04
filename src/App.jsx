@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAreaData } from "./api";
 import Form from "./components/Form";
+import ResultsList from "./components/ResultsList";
 
 import "./App.css";
 
@@ -32,7 +33,10 @@ function App() {
       <h1>Postcoders</h1>
       <Form setCurrentPostcode={setCurrentPostcode} />
       {areas.length !== 0 ? (
-        <h2>{`Areas for ${currentPostcode}: ${areas.length}`}</h2>
+        <div id="results">
+          <h2>{`Areas for ${currentPostcode}: ${areas.length}`}</h2>
+          <ResultsList areas={areas} />
+        </div>
       ) : (
         <></>
       )}
