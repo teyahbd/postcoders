@@ -12,7 +12,6 @@ function App() {
   const load = async () => {
     try {
       const areaData = await getAreaData(currentPostcode);
-
       setAreas(areaData);
     } catch (error) {
       setCurrentPostcode(null);
@@ -24,9 +23,20 @@ function App() {
 
   useEffect(() => {
     if (currentPostcode !== null) {
-      load();
+      if (currentPostcode in localStorage) {
+        const areaData = JSON.parse(localStorage.getItem(currentPostcode));
+        setAreas(areaData);
+      } else {
+        load();
+      }
     }
   }, [currentPostcode]);
+
+  useEffect(() => {
+    if (!(currentPostcode in localStorage)) {
+      localStorage.setItem(currentPostcode, JSON.stringify(areas));
+    }
+  }, [areas]);
 
   return (
     <div className="App">

@@ -21,7 +21,7 @@ const Form = ({ setCurrentPostcode }) => {
   function handleSubmit(event) {
     event.preventDefault();
     if (isCorrectFormat) {
-      setCurrentPostcode(input);
+      setCurrentPostcode(input.toLowerCase());
     }
   }
 
