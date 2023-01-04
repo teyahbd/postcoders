@@ -1,29 +1,41 @@
 import { useEffect, useState } from "react";
 import { getAreaData } from "./api";
+import Form from "./components/Form";
 
 import "./App.css";
 
 function App() {
   const [areas, setAreas] = useState([]);
+  const [currentPostcode, setCurrentPostcode] = useState(null);
 
   const load = async () => {
     try {
-      const areaData = await getAreaData();
+      const areaData = await getAreaData(currentPostcode);
 
       setAreas(areaData);
     } catch (error) {
-      window.alert("todo: fix app");
+      setCurrentPostcode(null);
+      window.alert(
+        "Please check this postcode exists and is in the correct format."
+      );
     }
   };
 
   useEffect(() => {
-    load();
-  }, []);
+    if (currentPostcode !== null) {
+      load();
+    }
+  }, [currentPostcode]);
 
   return (
     <div className="App">
       <h1>Postcoders</h1>
-      <h2>{`Areas for BB10: ${areas.length}`}</h2>
+      <Form setCurrentPostcode={setCurrentPostcode} />
+      {areas.length !== 0 ? (
+        <h2>{`Areas for ${currentPostcode}: ${areas.length}`}</h2>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
